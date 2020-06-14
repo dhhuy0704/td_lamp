@@ -1,6 +1,6 @@
-> \
-> This is a clone of [mattrayner](https://github.com/mattrayner/docker-lamp)'s source and is modifying for my developed environment. \
->
+
+> This is a clone of [mattrayner](https://github.com/mattrayner/docker-lamp)'s source and is modifying for my developed environment.
+
 # ![Docker-LAMP][logo]
 Docker-LAMP is a set of docker images that include the phusion baseimage (16.04 and 18.04 varieties), along with a LAMP stack ([Apache][apache], [MySQL][mysql] and [PHP][php]) all in one handy package.
 
