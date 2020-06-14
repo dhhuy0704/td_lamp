@@ -1,8 +1,8 @@
 FROM phusion/baseimage:0.11
-MODIFYER TommyDo <dhhuy0704@gmail.com>
+MAINTAINER TommyDo <dhhuy0704@gmail.com>
 ENV REFRESHED_AT 2020-06-14
 
-# based on Matthew Rayner <hello@rayner.io>
+# MAINTAINER Matthew Rayner <hello@rayner.io>
 # ENV REFRESHED_AT 2019-06-11
 # based on dgraziotin/lamp
 # MAINTAINER Daniel Graziotin <daniel@ineed.coffee>
@@ -55,6 +55,7 @@ RUN tar xfvz /tmp/phpmyadmin.tar.gz -C /var/www
 RUN ln -s /var/www/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /var/www/phpmyadmin
 RUN mv /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
 
+# TD: I commented this code because I install composer by apt-get.
 # Add composer
 # RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 #    php composer-setup.php && \
@@ -70,9 +71,11 @@ RUN a2enmod rewrite
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 ADD app/ /app
 
-#Environment variables to configure php
+# Environment variables to configure php
 ENV PHP_UPLOAD_MAX_FILESIZE 10M
 ENV PHP_POST_MAX_SIZE 10M
+# See more timezone at: https://www.php.net/manual/en/timezones.php
+ENV PHP_TIMEZONE "America\/Edmonton"
 ENV PHP_VERSION 7.4
 
 # Add volumes for the app and MySql
