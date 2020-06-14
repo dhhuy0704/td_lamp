@@ -1,7 +1,9 @@
 FROM phusion/baseimage:0.11
-MAINTAINER Matthew Rayner <hello@rayner.io>
-ENV REFRESHED_AT 2019-06-11
+MODIFYER TommyDo <dhhuy0704@gmail.com>
+ENV REFRESHED_AT 2020-06-14
 
+# based on Matthew Rayner <hello@rayner.io>
+# ENV REFRESHED_AT 2019-06-11
 # based on dgraziotin/lamp
 # MAINTAINER Daniel Graziotin <daniel@ineed.coffee>
 
@@ -29,6 +31,7 @@ RUN add-apt-repository -y ppa:ondrej/php && \
   apt-get -y upgrade && \
   apt-get -y install postfix supervisor wget git apache2 php-xdebug libapache2-mod-php mysql-server php-mysql pwgen php-apcu php-gd php-xml php-mbstring php-gettext zip unzip php-zip curl php-curl && \
   apt-get -y autoremove && \
+  apt-get -y install nano git curl composer && \
   echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Add image configuration and scripts
@@ -53,10 +56,10 @@ RUN ln -s /var/www/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /var/www/phpmy
 RUN mv /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
 
 # Add composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php composer-setup.php && \
-    php -r "unlink('composer-setup.php');" && \
-    mv composer.phar /usr/local/bin/composer
+# RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+#    php composer-setup.php && \
+#    php -r "unlink('composer-setup.php');" && \
+#    mv composer.phar /usr/local/bin/composer
 
 ENV MYSQL_PASS:-$(pwgen -s 12 1)
 # config to enable .htaccess
